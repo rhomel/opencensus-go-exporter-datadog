@@ -92,10 +92,10 @@ func (s *statsExporter) submitMetric(v *view.View, row *view.Row, metricName str
 
 	switch data := row.Data.(type) {
 	case *view.CountData:
-		return client.Gauge(metricName, float64(data.Value), opt.tagMetrics(row.Tags, tags), rate)
+		return client.Count(metricName, data.Value, opt.tagMetrics(row.Tags, tags), rate)
 
 	case *view.SumData:
-		return client.Gauge(metricName, float64(data.Value), opt.tagMetrics(row.Tags, tags), rate)
+		return client.Count(metricName, data.Value, opt.tagMetrics(row.Tags, tags), rate)
 
 	case *view.LastValueData:
 		return client.Gauge(metricName, float64(data.Value), opt.tagMetrics(row.Tags, tags), rate)
